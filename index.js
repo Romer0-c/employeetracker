@@ -49,6 +49,12 @@ function menu() {
             createDepartment();
         } else if (answer.action === "Delete a department") {
             deleteDepartment();
+        } else if (answer.action === "Create an animal") {
+            createEmployee();
+        } else if (answer.action === "Update an animal's species") {
+            updateEmployee();
+        } else if (answer.action === "Delete an animal") {
+            deleteEmployee();
         } else {
             connection.end();
         }
@@ -111,3 +117,18 @@ function deleteDepartment() {
     });
 }
 
+ //functions to be written out 
+ //"Create an emloyee",
+  //createEmployee();
+ //"Update an employee",
+    //updateEmployee();
+ //"Delete an employee",
+    //deleteEmployee();
+
+
+    //"Create a role",
+  //createRole();
+ //"Update a role",
+    //updaterRole();
+ //"Delete a role",
+    //deleteRole();

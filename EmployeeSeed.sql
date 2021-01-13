@@ -1,0 +1,55 @@
+DROP DATABASE IF EXISTS emptracker_db;
+CREATE DATABASE emptracker_db;
+
+USE emptracker_db;
+
+CREATE TABLE department (
+    id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(30),
+    PRIMARY KEY (id)
+);
+
+INSERT INTO department (name)
+VALUES ("Legal");
+
+CREATE TABLE role (
+    id INT AUTO_INCREMENT NOT NULL,
+    title VARCHAR(30) NOT NULL,
+    salary decimal NOT NULL,
+    department_id INT(30) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (department_id) REFERENCES department (id) ON DELETE CASCADE
+);
+
+INSERT INTO role (title, salary, department_id)
+VALUES ("Software Engineer", 100000, 2);
+
+INSERT INTO role (title, salary, department_id)
+VALUES ("Account Manager", 80000, 1);
+
+CREATE TABLE employee (
+    id INT AUTO_INCREMENT NOT NULL,
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(30) NOT NULL,
+    role_id INT(30) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+INSERT INTO employee (firstname, lastname, role_id)
+VALUES
+/*("Jill", "Snake", 01),
+("Henry", "Turtle"),
+("Ella", "Bee");*/
+
+/*UPDATE employee
+SET species = "Elephant"
+WHERE name = "Ella";
+
+DELETE FROM animals WHERE name = "Ella";
+
+SELECT * FROM animals; */
+
+/*4:13 HW Walkthrough*/
+
+
+
