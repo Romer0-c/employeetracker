@@ -11,6 +11,9 @@ CREATE TABLE department (
 
 INSERT INTO department (name)
 VALUES ("Legal");
+INSERT INTO department (name)
+VALUES ("Engineering");
+
 
 CREATE TABLE role (
     id INT AUTO_INCREMENT NOT NULL,
@@ -35,21 +38,5 @@ CREATE TABLE employee (
     PRIMARY KEY (id)
 );
 
-INSERT INTO employee (firstname, lastname, role_id)
-VALUES
-/*("Jill", "Snake", 01),
-("Henry", "Turtle"),
-("Ella", "Bee");*/
-
-/*UPDATE employee
-SET species = "Elephant"
-WHERE name = "Ella";
-
-DELETE FROM animals WHERE name = "Ella";
-
-SELECT * FROM animals; */
-
-/*4:13 HW Walkthrough*/
-
-
-
+/*INSERT INTO employee (firstname, lastname, role_id)
+VALUES */

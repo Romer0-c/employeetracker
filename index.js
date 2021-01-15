@@ -39,6 +39,7 @@ function menu() {
                 "View all roles",
                 "Add a role",
                 "Update a role",
+                "Delete a role",
                 "Exit",
             ]
         }
@@ -49,13 +50,23 @@ function menu() {
             createDepartment();
         } else if (answer.action === "Delete a department") {
             deleteDepartment();
-        } else if (answer.action === "Create an animal") {
+        } else if (answer.action === "View all employees") {
+            readEmployee();
+        } else if (answer.action === "Create an emloyee") {
             createEmployee();
-        } else if (answer.action === "Update an animal's species") {
+        } else if (answer.action === "Update an employee") {
             updateEmployee();
-        } else if (answer.action === "Delete an animal") {
+        } else if (answer.action === "Delete an employee") {
             deleteEmployee();
-        } else {
+        } else if (answer.action === "View all roles") {
+            readRole();
+        } else if (answer.action === "Add a role") {
+            createRole();
+        } else if (answer.action === "Update a role") {
+            updateRole();
+        } else if (answer.action === "Delete a role") {
+            deleteRole();
+        }  else {
             connection.end();
         }
     })
@@ -117,18 +128,60 @@ function deleteDepartment() {
     });
 }
 
- //functions to be written out 
- //"Create an emloyee",
-  //createEmployee();
- //"Update an employee",
-    //updateEmployee();
- //"Delete an employee",
-    //deleteEmployee();
+
+//"View all employees"
+  function readEmployee(){
+        connection.query("SELECT * FROM employee", function (err, result) {
+            if (err) throw err;
+    
+            console.table(result);
+    
+            menu();
+        });
+    }
+
+//"Create an emloyee"
+function createEmployee(){
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "What is the employees first name?"
+        },
+        {
+            type: "input",
+            name: "last",
+            message: "What is the employees last name?"
+        },
+    ]).then(function (answers) {
+        connection.query("INSERT INTO employee (name, last) VALUES (?, ?)", [answers.name, answers.species], function (err, result) {
+            if (err) throw err;
+
+            console.log("Successfully created an employee!");
+            menu();
+        });
+    })
+}
 
 
-    //"Create a role",
-  //createRole();
- //"Update a role",
-    //updaterRole();
- //"Delete a role",
-    //deleteRole();
+//"Update an employee"
+function updateEmployee(){}
+
+
+//"Delete an employee"
+function deleteEmployee(){}
+
+//"View all roles"
+function readRole(){}
+
+
+//"Add a role"
+function createRole(){}
+
+
+//"Update a role"
+function updateRole(){}
+
+//"Delete a role"
+function deleteRole(){}
+
