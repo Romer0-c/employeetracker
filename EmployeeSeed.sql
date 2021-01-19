@@ -11,18 +11,21 @@ CREATE TABLE department (
 
 INSERT INTO department (name)
 VALUES ("Legal");
+
 INSERT INTO department (name)
 VALUES ("Engineering");
+
+INSERT INTO department (name)
+VALUES ("Sales");
 
 
 CREATE TABLE role (
     id INT AUTO_INCREMENT NOT NULL,
     title VARCHAR(30) NOT NULL,
-    salary decimal NOT NULL,
-    department_id INT(30) NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (department_id) REFERENCES department (id) ON DELETE CASCADE
-);
+    salary decimal,
+    department_id INT(30),
+    PRIMARY KEY (id)
+    );
 
 INSERT INTO role (title, salary, department_id)
 VALUES ("Software Engineer", 100000, 2);
@@ -34,9 +37,16 @@ CREATE TABLE employee (
     id INT AUTO_INCREMENT NOT NULL,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
-    role_id INT(30) NOT NULL,
+    role_id INT(30),
     PRIMARY KEY (id)
 );
 
-/*INSERT INTO employee (firstname, lastname, role_id)
-VALUES */
+INSERT INTO employee (first_name, last_name)
+VALUES
+("Ada", "Lovelace"),
+("Edith", "Clarke"),
+("Grace", "Hopper"),
+("Arabella", "Mansfield"),
+("Charlotte", "Ray"),
+("Sonia", "Sotomayor"),
+("Ruth", "Bader Ginsburg");

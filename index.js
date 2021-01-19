@@ -62,8 +62,6 @@ function menu() {
             readRole();
         } else if (answer.action === "Add a role") {
             createRole();
-        } else if (answer.action === "Update a role") {
-            updateRole();
         } else if (answer.action === "Delete a role") {
             deleteRole();
         }  else {
@@ -128,6 +126,43 @@ function deleteDepartment() {
     });
 }
 
+//"View all roles"
+function readRole() {
+    connection.query("SELECT * FROM role", function (err, result) {
+        if (err) throw err;
+        
+        menu ();
+    });
+}
+
+
+//"Add a role"
+function createRole(){
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "title",
+            message: "What is the roles title?"
+        },
+        {
+            type: "input",
+            name: "salary",
+            message: "What is the roles salary?"
+        },
+    ]).then(function (answers) {
+        connection.query("INSERT INTO role (title, salary) VALUES (?, ?)", [answers.title, answers.salary], function(err, result){
+            if (err) throw err;
+
+            console.log("Successfully created a role!");
+            menu();
+        });
+    })
+}
+
+
+//"Delete a role"
+//function deleteRole(){}
+
 
 //"View all employees"
   function readEmployee(){
@@ -154,7 +189,7 @@ function createEmployee(){
             message: "What is the employees last name?"
         },
     ]).then(function (answers) {
-        connection.query("INSERT INTO employee (name, last) VALUES (?, ?)", [answers.name, answers.species], function (err, result) {
+        connection.query("INSERT INTO employee (name, last) VALUES (?, ?)", [answers.name, answers.last], function (err, result) {
             if (err) throw err;
 
             console.log("Successfully created an employee!");
@@ -164,24 +199,70 @@ function createEmployee(){
 }
 
 
-//"Update an employee"
-function updateEmployee(){}
+// //"Update an employee"
+// function updateEmployee() {
+//     connection.query("SELECT * FROM employee", function (err, result){
+//         if (err) throw err;
+//         const employees = result.map((employee) => {
+//             return {
+//                 name: employee.first_name,
+//                 value: employee.role_id,
+//             }
+
+//         });
+
+//         inquirer.prompt ([
+//             {
+//                 type:"list",
+//                 name: "whichEmployee",
+//                 message: "Which employees role would you like to update?",
+//                 choices: employees
+//             },
+//             {
+//                 type: "input",
+//                 name: "role",
+//                 message: "What role whould you like to update them to?",
+//             }
+//         ]).then(function (answers) {
+//             connection.query("UPDATE employee SET role = ? WHERE id = ?", [answers.role, answers.whichEmployee], function (err, result){
+//                 if (err) throw (err);
+
+//                 console.log("Successfully updated an animals species!");
+//                 menu();
+//             });
+
+//         })
+//     });
+// }
 
 
 //"Delete an employee"
-function deleteEmployee(){}
+function deleteEmployee() {
+    connection.query("SELECT * FROM employee", function (err, result) {
+        if (err) throw err;
+        const employee = result.map((employee) => {
+            return {
+                name: employee.first_name,
+                value: employee.id,
+            }
+        });
 
-//"View all roles"
-function readRole(){}
+        inquirer.prompt([
+            {
+                type: "list",
+                name: "whichEmployee",
+                message: "Which employee would you like to delete?",
+                choices: employee
+            }
+        ]).then(function (answers) {
+            connection.query("DELETE FROM employee where id = ?", [answers.whichEmployee], function(err, result){
+                if (err) throw err; 
 
+                console.log("Successfully deleted an employee");
+                menu();
+            });
+        })
+    });
+}
 
-//"Add a role"
-function createRole(){}
-
-
-//"Update a role"
-function updateRole(){}
-
-//"Delete a role"
-function deleteRole(){}
 
