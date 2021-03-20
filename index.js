@@ -4,10 +4,10 @@ const inquirer = require("inquirer");
 // MySQL DB Connection Information (remember to change this with our specific credentials)
 
 const connection = mysql.createConnection({
-    host: "localhost",
+    host: process.env.DB_HOST,
     port: 3306,
-    user: "root",
-    password: "",
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
     database: "emptracker_db"
 });
 
